@@ -44,7 +44,8 @@ table {
 }
 body{
     line-height: 1;
-    background-color: #9567BE;
+    background-color: #9055BE;
+	font-family: 'Raleway';
     
 }
 

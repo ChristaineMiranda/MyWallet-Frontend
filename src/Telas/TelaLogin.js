@@ -1,10 +1,12 @@
-import { useState } from 'react'
-import styled from 'styled-components'
+import { useState } from 'react';
+import styled from 'styled-components';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
+import Input from './Elementos/Input';
+import Botao from './Elementos/Botao';
 
 
-export default function TelaInicial() {
+export default function TelaLogin() {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -19,19 +21,17 @@ export default function TelaInicial() {
         //enviaDados.catch((erro) => alert(erro,response.data.message));
 
     }
-    console.log(email)
+    //com forms quem chama a função não é o botão, mas sim o container!!!
 
     return (
         <Container>
             <div>MyWallet</div>
-            <Form onSubmit={fazerLogin}>
-
-                <input type="email" placeholder="E-mail" value={email} onChange={(event) => (setEmail(event.target.value))}  />
-                <input type="password" placeholder="Senha" value={senha} onChange={(event) => (setSenha(event.target.value))} />
-                <button type="submit">Entrar</button>
-
+            <Form onSubmit={fazerLogin}> 
+            <Input tipo={"email"} subescrito={"E-mail"} valor={email} setValor={setEmail}/>
+            <Input tipo={"password"} subescrito={"Senha"} valor={senha} setValor={setSenha}/>
+            <Botao textoBotao={"Entrar"}/>
             </Form>
-            <Link to ="/cadastro">Primeira vez? Cadastre-se!</Link>
+            <LinkStyled to ="/cadastro"><p>Primeira vez? Cadastre-se!</p></LinkStyled>
         </Container>
     )
 }
@@ -43,12 +43,12 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 height: 100vh;
-
 div{
     color: #ffffff;
     font-size: 32px;
     font-weight: 400;
     margin-bottom: 24px;
+    font-family:'Saira Stencil One', cursive;
 }
 h1{
     color: #ffffff;
@@ -56,29 +56,14 @@ h1{
     font-weight: 700;
 }
 `
+const LinkStyled = styled(Link)`
+text-decoration: none;
+color: #ffffff;
+font-weight: 700;
+`
+
 const Form = styled.form`
 display: flex;
 flex-direction: column;
 align-items: center;
-input{
-    width: 326px;
-    height: 58px;
-    border-radius: 5px;
-    border-color: #ffffff;
-    margin-bottom: 13px;
-}
-input::placeholder{
-    color:#000000;
-}
-button{
-    width: 326px;
-    height: 46px;
-    font-size: 20px;
-    font-weight: 700;
-    color: #ffffff;
-    background-color: #A328D6;
-    margin-bottom: 36px;
-    border-radius: 5px;
-    border-color: #A328D6;
-}
 `
