@@ -22,7 +22,7 @@ export default function TelaCadastro(){
     }
     return(
         <Container>
-        <div>MyWallet</div>
+        <Titulo>MyWallet</Titulo>
         <Form onSubmit={fazerCadastro}>
         <Input tipo={"text"} subescrito={"Nome"} valor={nome} setValor={setNome}/>
         <Input tipo={"email"} subescrito={"E-mail"} valor={email} setValor={setEmail}/>
@@ -34,7 +34,9 @@ export default function TelaCadastro(){
     </Container>
     )
 }
-
+const Titulo = styled.div`
+    font-family:'Saira Stencil One', cursive;
+`
 const Container = styled.div`
 display: flex;
 flex-direction: column;
