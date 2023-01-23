@@ -18,7 +18,7 @@ export default function TelaLogin({ setToken }) {
             headers: {
               token: `Bearer ${response.data}`
             }
-          });//`Bearer ${response.data}`
+          });
         navigate("/home");
     }
     function falhaLogin(erro) {
@@ -33,7 +33,7 @@ export default function TelaLogin({ setToken }) {
     function fazerLogin(event) {
         event.preventDefault();
         const dadosLogin = { email, senha };
-        const enviaDados = axios.post("http://localhost:5000/", dadosLogin);//MUDAR PARA VARIÁVEIS DE AMBIENTE
+        const enviaDados = axios.post(`${process.env.REACT_APP_API_URL}`, dadosLogin);
         enviaDados.then(sucessoLogin);
         enviaDados.catch(falhaLogin);
     }

@@ -1,5 +1,7 @@
 import { useState } from "react"
 import styled from "styled-components";
+import axios from 'axios';
+import {useNavigate, Link} from 'react-router-dom';
 import Input from "./Elementos/Input"
 import Botao from "./Elementos/Botao";
 
@@ -10,7 +12,16 @@ export default function TelaCadastro(){
     const [email, setEmail]= useState("");
     const [senha, setSenha]= useState("");
     const [confirmaSenha, setConfirmaSenha] = useState("");
+    const navigate = useNavigate();
 
+
+    function sucessoEnvio(response){
+        alert(response.data);
+        navigate("/");
+    }
+    function falhaEnvio(erro){
+        alert(erro.response.data);
+    }
     function fazerCadastro(event){
         event.preventDefault();
         if(senha !== confirmaSenha){
@@ -18,7 +29,13 @@ export default function TelaCadastro(){
             setSenha("");
             setConfirmaSenha("");
         }
-        //ENVIAR PRO BACKEND
+       else{
+        const dados = {nome, email, senha, confirmaSenha};
+        const enviaDados = axios.post(`${process.env.REACT_APP_API_URL}sign-up`, dados);
+        enviaDados.then(sucessoEnvio);
+        enviaDados.catch(falhaEnvio);
+
+       }
     }
     return(
         <Container>
@@ -30,7 +47,7 @@ export default function TelaCadastro(){
         <Input tipo={"password"} subescrito={"Confirme a senha"} valor={confirmaSenha} setValor={setConfirmaSenha}/>
         <Botao textoBotao={"Cadastrar"}/>
         </Form>
-        <h1>Já tem uma conta? Entre agora!</h1>
+        <Link to="/"><h1>Já tem uma conta? Entre agora!</h1></Link>
     </Container>
     )
 }
@@ -54,6 +71,7 @@ h1{
     color: #ffffff;
     font-size: 15px;
     font-weight: 700;
+    text-decoration: none;
 }
 `
 const Form = styled.form`
