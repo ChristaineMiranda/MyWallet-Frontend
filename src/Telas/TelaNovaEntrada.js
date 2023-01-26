@@ -22,7 +22,8 @@ export default function TelaNovaEntrada({ token }) {
     }
     function registrarEntrada(event) {
         event.preventDefault();
-        const novaEntrada = { tipo: "entrada", valor: valorEntrada, descricao: descricaoEntrada };
+        const preco = valorEntrada.replace(",", ".");
+        const novaEntrada = { tipo: "entrada", valor: preco, descricao: descricaoEntrada };
         const enviaEntrada = axios.post(`${process.env.REACT_APP_API_URL}insere-movimentacao`, novaEntrada, token);
         enviaEntrada.then(sucessoEntrada);
         enviaEntrada.catch(falhaEntrada);

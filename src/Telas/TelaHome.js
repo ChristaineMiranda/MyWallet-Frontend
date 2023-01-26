@@ -40,7 +40,7 @@ export default function TelaHome({ token, setToken }) {
                 soma = soma - Number(novaListagem[i].valor);
             }
         }
-        setSaldoCarteira(soma);
+        setSaldoCarteira(parseFloat(soma).toFixed(2));
         if (response.data.movimentacao.length) {
             setRegistroVazio(false);
         }
